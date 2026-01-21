@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /Users/judsonfisher/Desktop/Elias\\\\ Immersive/Website/el-claude && npm create svelte@latest . -- --template skeleton --typescript --no-add-ons:*)",
+      "Bash(npx sv create . --template minimal --types ts)",
+      "Bash(npx sv create:*)",
+      "Bash(npm init -y)",
+      "Bash(npm install @sveltejs/kit @sveltejs/adapter-vercel @sveltejs/vite-plugin-svelte svelte vite --save-dev)",
+      "Bash(cd /Users/judsonfisher/Desktop/Elias\\\\ Immersive/Website/el-claude && npm install:*)",
+      "Bash(npm run build)",
+      "Bash(cd:*)",
+      "Bash(npm install)"
+    ]
+  }
+}
