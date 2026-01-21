@@ -6,7 +6,7 @@ import { schemaTypes } from './schemas';
 export default defineConfig({
 	name: 'elias-immersive',
 	title: 'Elias Immersive',
-	projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'your-project-id',
+	projectId: process.env.SANITY_STUDIO_PROJECT_ID || '2q2nqf2m',
 	dataset: process.env.SANITY_STUDIO_DATASET || 'production',
 	plugins: [structureTool(), visionTool()],
 	schema: {
