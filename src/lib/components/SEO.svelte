@@ -22,8 +22,8 @@
 
 	let canonicalUrl = $derived(`${SITE_URL}${$page.url.pathname}`);
 
-	// Local Business structured data
-	const localBusinessSchema = {
+	// Local Business structured data (reactive to track image prop)
+	let localBusinessSchema = $derived({
 		'@context': 'https://schema.org',
 		'@type': 'LocalBusiness',
 		'@id': `${SITE_URL}/#business`,
@@ -74,10 +74,10 @@
 			'Property Documentation',
 			'Matterport Scanning'
 		]
-	};
+	});
 
-	// Website structured data
-	const websiteSchema = {
+	// Website structured data (reactive to track description prop)
+	let websiteSchema = $derived({
 		'@context': 'https://schema.org',
 		'@type': 'WebSite',
 		'@id': `${SITE_URL}/#website`,
@@ -87,10 +87,10 @@
 		publisher: {
 			'@id': `${SITE_URL}/#business`
 		}
-	};
+	});
 
-	// Current page structured data
-	const webPageSchema = {
+	// Current page structured data (reactive to track canonicalUrl changes)
+	let webPageSchema = $derived({
 		'@context': 'https://schema.org',
 		'@type': 'WebPage',
 		'@id': `${canonicalUrl}/#webpage`,
@@ -103,7 +103,7 @@
 		about: {
 			'@id': `${SITE_URL}/#business`
 		}
-	};
+	});
 </script>
 
 <svelte:head>

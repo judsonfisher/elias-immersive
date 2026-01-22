@@ -18,7 +18,9 @@
       "Bash(git commit:*)",
       "Bash(npm run check)",
       "Bash(curl:*)",
-      "mcp__Sanity__get_schema"
+      "mcp__Sanity__get_schema",
+      "Bash(git push origin main)",
+      "Bash(npm install @portabletext/svelte)"
     ]
   }
 }

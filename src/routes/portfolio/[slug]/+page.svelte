@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { urlFor } from '$lib/sanity/client';
 	import { SEO } from '$lib/components';
+	import { PortableText } from '@portabletext/svelte';
 	import type { PageData } from './$types';
 
 	interface Props {
@@ -33,9 +34,16 @@
 			<div class="container">
 				<div class="hero-grid">
 					<div class="hero-content">
+						{#if project.category}
+							<span class="category-tag">{project.category}</span>
+						{/if}
 						<h1>{project.title}</h1>
 						<p class="description">{project.description}</p>
-						<span class="category-tag">{project.category}</span>
+						{#if project.fullDescription && project.fullDescription.length > 0}
+							<div class="full-description">
+								<PortableText value={project.fullDescription} />
+							</div>
+						{/if}
 						<a href="/contact" class="btn btn-primary">Contact</a>
 					</div>
 					<div class="hero-image">
@@ -126,11 +134,33 @@
 		max-width: 500px;
 	}
 
-	.category-tag {
-		display: block;
-		font-size: 0.9rem;
+	.full-description {
+		font-size: 1rem;
 		color: var(--color-text-light);
+		line-height: 1.8;
 		margin-bottom: var(--spacing-md);
+		max-width: 500px;
+	}
+
+	.full-description :global(p) {
+		margin-bottom: 1rem;
+	}
+
+	.full-description :global(p:last-child) {
+		margin-bottom: 0;
+	}
+
+	.category-tag {
+		display: inline-block;
+		font-size: 0.75rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--color-primary);
+		background-color: rgba(74, 84, 64, 0.1);
+		padding: 0.375rem 0.875rem;
+		border-radius: 50px;
+		margin-bottom: var(--spacing-sm);
 	}
 
 	.hero-image {
