@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { urlFor } from '$lib/sanity/client';
+	import { SEO } from '$lib/components';
 	import type { PageData } from './$types';
 
 	interface Props {
@@ -8,11 +9,21 @@
 
 	let { data }: Props = $props();
 	let project = $derived(data.project);
+
+	let projectImageUrl = $derived(
+		project?.image ? urlFor(project.image).width(1200).height(630).url() : undefined
+	);
 </script>
+
+<SEO
+	title={`${project?.title || 'Project'} | Elias Immersive`}
+	description={project?.description || 'View this project from Elias Immersive.'}
+	image={projectImageUrl}
+	type="article"
+/>
 
 <svelte:head>
 	<title>{project?.title || 'Project'} | Elias Immersive</title>
-	<meta name="description" content={project?.description || 'View this project from Elias Immersive.'} />
 </svelte:head>
 
 {#if project}

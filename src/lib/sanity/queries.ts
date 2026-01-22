@@ -68,3 +68,32 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
   address,
   socialLinks
 }`;
+
+export const landingPageBySlugQuery = `*[_type == "landingPage" && slug.current == $slug][0]{
+  title,
+  slug,
+  seo,
+  heroEyebrow,
+  heroHeadline,
+  heroSubheadline,
+  heroSolution,
+  heroCta,
+  problemTitle,
+  problemStats,
+  problemSummary,
+  solutionTitle,
+  solutionDescription,
+  solutionFeatures,
+  solutionImage,
+  solutionImageCaption,
+  useCasesTitle,
+  useCasesIntro,
+  useCases,
+  processTitle,
+  processSteps,
+  trustTitle,
+  trustContent,
+  ctaTitle,
+  ctaDescription,
+  ctaBenefits
+}`;

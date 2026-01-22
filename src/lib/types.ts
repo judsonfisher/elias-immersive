@@ -52,3 +52,44 @@ export interface SiteSettings {
 		facebook?: string;
 	};
 }
+
+export interface LandingPage {
+	title: string;
+	slug: { current: string };
+	seo?: {
+		metaTitle?: string;
+		metaDescription?: string;
+	};
+	heroEyebrow?: string;
+	heroHeadline: string;
+	heroSubheadline?: string;
+	heroSolution?: string;
+	heroCta?: string;
+	problemTitle?: string;
+	problemStats?: Array<{
+		stat: string;
+		description: string;
+	}>;
+	problemSummary?: string;
+	solutionTitle?: string;
+	solutionDescription?: string;
+	solutionFeatures?: string[];
+	solutionImage?: SanityImageSource;
+	solutionImageCaption?: string;
+	useCasesTitle?: string;
+	useCasesIntro?: string;
+	useCases?: Array<{
+		title: string;
+		description: string;
+	}>;
+	processTitle?: string;
+	processSteps?: Array<{
+		title: string;
+		description: string;
+	}>;
+	trustTitle?: string;
+	trustContent?: string;
+	ctaTitle?: string;
+	ctaDescription?: string;
+	ctaBenefits?: string[];
+}

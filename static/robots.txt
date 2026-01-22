@@ -1,0 +1,12 @@
+# Robots.txt for Elias Immersive
+# https://eliasimmersive.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://eliasimmersive.com/sitemap.xml
+
+# Disallow admin/preview paths
+Disallow: /api/
+Disallow: /studio/

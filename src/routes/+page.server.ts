@@ -1,5 +1,4 @@
-import type { PageServerLoad, Actions } from './$types';
-import { fail } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 import { client, urlFor } from '$lib/sanity/client';
 import { homePageQuery, servicesQuery, projectsQuery } from '$lib/sanity/queries';
 import type { HomePage, Service, Project, UseCase } from '$lib/types';
@@ -109,44 +108,3 @@ export const load: PageServerLoad = async () => {
 	}
 };
 
-export const actions: Actions = {
-	default: async ({ request }) => {
-		const formData = await request.formData();
-		const firstName = formData.get('firstName')?.toString();
-		const lastName = formData.get('lastName')?.toString();
-		const email = formData.get('email')?.toString();
-		const phone = formData.get('phone')?.toString();
-		const message = formData.get('message')?.toString();
-
-		// Basic validation
-		if (!firstName || !lastName || !email || !phone || !message) {
-			return fail(400, {
-				error: 'Please fill in all required fields.',
-				success: false
-			});
-		}
-
-		// Email validation
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		if (!emailRegex.test(email)) {
-			return fail(400, {
-				error: 'Please enter a valid email address.',
-				success: false
-			});
-		}
-
-		// Log the submission (in production, integrate with email service or CRM)
-		console.log('Contact form submission:', {
-			firstName,
-			lastName,
-			email,
-			phone,
-			message,
-			timestamp: new Date().toISOString()
-		});
-
-		return {
-			success: true
-		};
-	}
-};

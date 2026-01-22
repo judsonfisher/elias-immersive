@@ -9,7 +9,16 @@
       "Bash(cd /Users/judsonfisher/Desktop/Elias\\\\ Immersive/Website/el-claude && npm install:*)",
       "Bash(npm run build)",
       "Bash(cd:*)",
-      "Bash(npm install)"
+      "Bash(npm install)",
+      "Bash(npx sanity login:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nConfigure Sanity project ID\n\nUpdate studio config with actual Sanity project ID \\(2q2nqf2m\\).\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd Vercel Speed Insights\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit:*)",
+      "Bash(npm run check)",
+      "Bash(curl:*)",
+      "mcp__Sanity__get_schema"
     ]
   }
 }

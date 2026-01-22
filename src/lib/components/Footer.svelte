@@ -1,5 +1,16 @@
 <script lang="ts">
+	import { urlFor } from '$lib/sanity/client';
+	import type { SiteSettings } from '$lib/types';
+
+	interface Props {
+		siteSettings?: SiteSettings;
+	}
+
+	let { siteSettings }: Props = $props();
+
 	const currentYear = new Date().getFullYear();
+	const logoUrl = $derived(siteSettings?.logo ? urlFor(siteSettings.logo).width(200).url() : null);
+	const siteName = $derived(siteSettings?.siteName || 'Elias Immersive');
 </script>
 
 <footer class="footer">
@@ -7,8 +18,12 @@
 		<div class="footer-main">
 			<div class="footer-brand">
 				<a href="/" class="logo">
-					<span class="logo-icon">ei</span>
-					<span class="logo-text">Elias Immersive</span>
+					{#if logoUrl}
+						<img src={logoUrl} alt={siteName} class="logo-image" />
+					{:else}
+						<span class="logo-icon">ei</span>
+						<span class="logo-text">{siteName}</span>
+					{/if}
 				</a>
 				<p class="tagline">Precision Capture. Interactive Results.</p>
 			</div>
@@ -84,6 +99,12 @@
 	.logo-text {
 		font-size: 1rem;
 		font-weight: 500;
+	}
+
+	.logo-image {
+		height: 2.5rem;
+		width: auto;
+		object-fit: contain;
 	}
 
 	.tagline {

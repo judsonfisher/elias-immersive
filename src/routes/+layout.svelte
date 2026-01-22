@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Header, Footer } from '$lib/components';
+	import { Header, Footer, SEO } from '$lib/components';
 	import '$lib/styles/global.css';
 	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 	import type { SiteSettings } from '$lib/types';
@@ -16,6 +16,9 @@
 	let { children, data }: Props = $props();
 </script>
 
+<!-- Global SEO defaults (pages can override with their own SEO component) -->
+<SEO />
+
 <svelte:head>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
@@ -27,7 +30,7 @@
 	<main>
 		{@render children()}
 	</main>
-	<Footer />
+	<Footer siteSettings={data.siteSettings} />
 </div>
 
 <style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ProjectCard } from '$lib/components';
+	import { ProjectCard, SEO } from '$lib/components';
 	import type { PageData } from './$types';
 
 	interface Props {
@@ -19,9 +19,13 @@
 	);
 </script>
 
+<SEO
+	title="Portfolio | Elias Immersive"
+	description="Explore our portfolio of virtual tours, aerial mapping, and 3D modeling projects in Park City and Utah."
+/>
+
 <svelte:head>
 	<title>Portfolio | Elias Immersive</title>
-	<meta name="description" content="Explore our portfolio of virtual tours, aerial mapping, and 3D modeling projects." />
 </svelte:head>
 
 <section class="portfolio-hero">

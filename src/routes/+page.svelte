@@ -1,20 +1,55 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import { ServiceCard, ProjectCard, Accordion, ArrowButton } from '$lib/components';
-	import type { PageData, ActionData } from './$types';
+	import { ServiceCard, ProjectCard, Accordion, ArrowButton, SEO } from '$lib/components';
+	import type { PageData } from './$types';
 
 	interface Props {
 		data: PageData;
-		form: ActionData;
 	}
 
-	let { data, form }: Props = $props();
+	let { data }: Props = $props();
 	let submitting = $state(false);
+	let submitted = $state(false);
+	let error = $state('');
+
+	async function handleSubmit(event: SubmitEvent) {
+		event.preventDefault();
+		submitting = true;
+		error = '';
+
+		const form = event.target as HTMLFormElement;
+		const formData = new FormData(form);
+
+		try {
+			const response = await fetch('https://formspree.io/f/xreewbna', {
+				method: 'POST',
+				body: formData,
+				headers: {
+					'Accept': 'application/json'
+				}
+			});
+
+			if (response.ok) {
+				submitted = true;
+				form.reset();
+			} else {
+				const data = await response.json();
+				error = data.errors?.map((e: any) => e.message).join(', ') || 'Something went wrong. Please try again.';
+			}
+		} catch (e) {
+			error = 'Something went wrong. Please try again.';
+		} finally {
+			submitting = false;
+		}
+	}
 </script>
+
+<SEO
+	title="Elias Immersive | Virtual Tours, Aerial Mapping & 3D Modeling"
+	description="We create digital representations of physical spaces using advanced imaging technology. Virtual tours, aerial mapping, and 3D modeling services in Park City, Utah."
+/>
 
 <svelte:head>
 	<title>Elias Immersive | Virtual Tours, Aerial Mapping & 3D Modeling</title>
-	<meta name="description" content="We create digital representations of physical spaces using advanced imaging technology. Virtual tours, aerial mapping, and 3D modeling services." />
 </svelte:head>
 
 <!-- Hero Section -->
@@ -116,7 +151,7 @@
 		<h2 class="section-title text-center">Contact Us</h2>
 
 		<div class="contact-form-wrapper">
-			{#if form?.success}
+			{#if submitted}
 				<div class="success-message">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 						<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -126,16 +161,7 @@
 					<p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
 				</div>
 			{:else}
-				<form
-					method="POST"
-					use:enhance={() => {
-						submitting = true;
-						return async ({ update }) => {
-							await update();
-							submitting = false;
-						};
-					}}
-				>
+				<form onsubmit={handleSubmit}>
 					<div class="form-row">
 						<div class="form-group">
 							<label for="firstName">First name <span class="required">*</span></label>
@@ -188,8 +214,8 @@
 						></textarea>
 					</div>
 
-					{#if form?.error}
-						<p class="error-message">{form.error}</p>
+					{#if error}
+						<p class="error-message">{error}</p>
 					{/if}
 
 					<button type="submit" class="btn btn-primary btn-full" disabled={submitting}>
