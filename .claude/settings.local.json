@@ -22,7 +22,8 @@
       "Bash(git push origin main)",
       "Bash(npm install @portabletext/svelte)",
       "Bash(npm install:*)",
-      "Bash(git revert:*)"
+      "Bash(git revert:*)",
+      "Bash(git checkout:*)"
     ]
   }
 }

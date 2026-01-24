@@ -1,11 +1,41 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import { SEO } from '$lib/components';
-	import type { ActionData } from './$types';
 
-	let { form }: { form: ActionData } = $props();
+	const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE'; // Get from https://web3forms.com
 
 	let submitting = $state(false);
+	let submitted = $state(false);
+	let error = $state('');
+
+	async function handleSubmit(event: SubmitEvent) {
+		event.preventDefault();
+		submitting = true;
+		error = '';
+
+		const form = event.target as HTMLFormElement;
+		const formData = new FormData(form);
+		formData.append('access_key', WEB3FORMS_KEY);
+
+		try {
+			const response = await fetch('https://api.web3forms.com/submit', {
+				method: 'POST',
+				body: formData
+			});
+
+			const data = await response.json();
+
+			if (data.success) {
+				submitted = true;
+				form.reset();
+			} else {
+				error = data.message || 'Something went wrong. Please try again.';
+			}
+		} catch (e) {
+			error = 'Something went wrong. Please try again.';
+		} finally {
+			submitting = false;
+		}
+	}
 </script>
 
 <SEO
@@ -61,7 +91,7 @@
 			</div>
 
 			<div class="contact-form-container">
-				{#if form?.success}
+				{#if submitted}
 					<div class="success-message">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -71,16 +101,12 @@
 						<p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
 					</div>
 				{:else}
-					<form
-						method="POST"
-						use:enhance={() => {
-							submitting = true;
-							return async ({ update }) => {
-								await update();
-								submitting = false;
-							};
-						}}
-					>
+					<form onsubmit={handleSubmit}>
+						<!-- Hidden fields for Web3Forms -->
+						<input type="hidden" name="subject" value="New Contact Form Submission - Elias Immersive" />
+						<input type="hidden" name="from_name" value="Elias Immersive Contact Form" />
+						<input type="checkbox" name="botcheck" class="hidden" style="display:none" />
+
 						<div class="form-group">
 							<label for="name">Name</label>
 							<input
@@ -89,7 +115,6 @@
 								name="name"
 								required
 								placeholder="Your name"
-								value={form?.name ?? ''}
 							/>
 						</div>
 
@@ -101,7 +126,6 @@
 								name="email"
 								required
 								placeholder="your@email.com"
-								value={form?.email ?? ''}
 							/>
 						</div>
 
@@ -112,7 +136,6 @@
 								id="phone"
 								name="phone"
 								placeholder="(555) 123-4567"
-								value={form?.phone ?? ''}
 							/>
 						</div>
 
@@ -120,11 +143,11 @@
 							<label for="service">Service Interest</label>
 							<select id="service" name="service">
 								<option value="">Select a service</option>
-								<option value="virtual-tour" selected={form?.service === 'virtual-tour'}>Virtual Tour</option>
-								<option value="aerial-mapping" selected={form?.service === 'aerial-mapping'}>Aerial Mapping</option>
-								<option value="3d-modeling" selected={form?.service === '3d-modeling'}>3D Modeling</option>
-								<option value="multiple" selected={form?.service === 'multiple'}>Multiple Services</option>
-								<option value="other" selected={form?.service === 'other'}>Other / Not Sure</option>
+								<option value="Virtual Tour">Virtual Tour</option>
+								<option value="Aerial Mapping">Aerial Mapping</option>
+								<option value="3D Modeling">3D Modeling</option>
+								<option value="Multiple Services">Multiple Services</option>
+								<option value="Other / Not Sure">Other / Not Sure</option>
 							</select>
 						</div>
 
@@ -136,11 +159,11 @@
 								rows="5"
 								required
 								placeholder="Tell us about your project..."
-							>{form?.message ?? ''}</textarea>
+							></textarea>
 						</div>
 
-						{#if form?.error}
-							<p class="error-message">{form.error}</p>
+						{#if error}
+							<p class="error-message">{error}</p>
 						{/if}
 
 						<button type="submit" class="btn btn-primary" disabled={submitting}>
