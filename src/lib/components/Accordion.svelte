@@ -80,7 +80,6 @@
 		color: var(--color-text-light);
 		line-height: 1.8;
 		margin: 0;
-		max-width: 900px;
 		white-space: pre-line;
 	}
 </style>
