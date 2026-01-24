@@ -1,11 +1,40 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import { SEO } from '$lib/components';
-	import type { ActionData } from './$types';
-
-	let { form }: { form: ActionData } = $props();
 
 	let submitting = $state(false);
+	let submitted = $state(false);
+	let error = $state('');
+
+	async function handleSubmit(event: SubmitEvent) {
+		event.preventDefault();
+		submitting = true;
+		error = '';
+
+		const form = event.target as HTMLFormElement;
+		const formData = new FormData(form);
+
+		try {
+			const response = await fetch('https://formspree.io/f/xreewbna', {
+				method: 'POST',
+				body: formData,
+				headers: {
+					'Accept': 'application/json'
+				}
+			});
+
+			if (response.ok) {
+				submitted = true;
+				form.reset();
+			} else {
+				const data = await response.json();
+				error = data.errors?.map((e: any) => e.message).join(', ') || 'Something went wrong. Please try again.';
+			}
+		} catch (e) {
+			error = 'Something went wrong. Please try again.';
+		} finally {
+			submitting = false;
+		}
+	}
 </script>
 
 <SEO
@@ -61,7 +90,7 @@
 			</div>
 
 			<div class="contact-form-container">
-				{#if form?.success}
+				{#if submitted}
 					<div class="success-message">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -71,16 +100,7 @@
 						<p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
 					</div>
 				{:else}
-					<form
-						method="POST"
-						use:enhance={() => {
-							submitting = true;
-							return async ({ update }) => {
-								await update();
-								submitting = false;
-							};
-						}}
-					>
+					<form onsubmit={handleSubmit}>
 						<div class="form-group">
 							<label for="name">Name</label>
 							<input
@@ -89,7 +109,6 @@
 								name="name"
 								required
 								placeholder="Your name"
-								value={form?.name ?? ''}
 							/>
 						</div>
 
@@ -101,7 +120,6 @@
 								name="email"
 								required
 								placeholder="your@email.com"
-								value={form?.email ?? ''}
 							/>
 						</div>
 
@@ -112,7 +130,6 @@
 								id="phone"
 								name="phone"
 								placeholder="(555) 123-4567"
-								value={form?.phone ?? ''}
 							/>
 						</div>
 
@@ -120,11 +137,11 @@
 							<label for="service">Service Interest</label>
 							<select id="service" name="service">
 								<option value="">Select a service</option>
-								<option value="virtual-tour" selected={form?.service === 'virtual-tour'}>Virtual Tour</option>
-								<option value="aerial-mapping" selected={form?.service === 'aerial-mapping'}>Aerial Mapping</option>
-								<option value="3d-modeling" selected={form?.service === '3d-modeling'}>3D Modeling</option>
-								<option value="multiple" selected={form?.service === 'multiple'}>Multiple Services</option>
-								<option value="other" selected={form?.service === 'other'}>Other / Not Sure</option>
+								<option value="virtual-tour">Virtual Tour</option>
+								<option value="aerial-mapping">Aerial Mapping</option>
+								<option value="3d-modeling">3D Modeling</option>
+								<option value="multiple">Multiple Services</option>
+								<option value="other">Other / Not Sure</option>
 							</select>
 						</div>
 
@@ -136,11 +153,11 @@
 								rows="5"
 								required
 								placeholder="Tell us about your project..."
-							>{form?.message ?? ''}</textarea>
+							></textarea>
 						</div>
 
-						{#if form?.error}
-							<p class="error-message">{form.error}</p>
+						{#if error}
+							<p class="error-message">{error}</p>
 						{/if}
 
 						<button type="submit" class="btn btn-primary" disabled={submitting}>
