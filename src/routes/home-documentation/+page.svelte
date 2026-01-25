@@ -148,7 +148,7 @@
 							allow="xr-spatial-tracking"
 						></iframe>
 					</div>
-					<p class="matterport-caption">Explore this live digital twin. Click the tags to see how assets and details are documented.</p>
+					<p class="matterport-caption">Navigate through this interactive tour and click the tags to see how we document your home's details.</p>
 				{:else if data.solutionImageUrl}
 					<img src={data.solutionImageUrl} alt={page.solutionImageCaption || 'Digital twin preview'} />
 				{:else}
@@ -449,9 +449,9 @@
 	/* Solution Section */
 	.solution-content {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr 1.4fr;
 		gap: var(--spacing-lg);
-		align-items: center;
+		align-items: start;
 	}
 
 	.solution-text p {
@@ -489,9 +489,10 @@
 	.matterport-embed {
 		position: relative;
 		width: 100%;
-		aspect-ratio: 16/9;
+		aspect-ratio: 4/3;
 		border-radius: 8px;
 		overflow: hidden;
+		min-height: 450px;
 		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 	}
 
