@@ -44,7 +44,7 @@
 		}
 	}
 
-	const seoTitle = page.seo?.metaTitle || 'Home Documentation & Digital Twins | Elias Immersive | Park City, Utah';
+	const seoTitle = page.seo?.metaTitle || 'Home Documentation & Digital Twins | Elias Immersive';
 	const seoDescription = page.seo?.metaDescription || 'Protect your home with comprehensive digital documentation. 3D scans and virtual walkthroughs for insurance claims, estate planning, and peace of mind.';
 </script>
 
@@ -61,20 +61,32 @@
 <!-- Hero Section -->
 <section class="hero">
 	<div class="container">
-		<div class="hero-content">
-			{#if page.heroEyebrow}
-				<p class="hero-eyebrow">{page.heroEyebrow}</p>
-			{/if}
-			<h1 class="hero-headline">{page.heroHeadline}</h1>
-			{#if page.heroSubheadline}
-				<p class="hero-subheadline">{page.heroSubheadline}</p>
-			{/if}
-			{#if page.heroSolution}
-				<p class="hero-solution">
-					<strong>There's a better way.</strong> {page.heroSolution.replace("There's a better way. ", '')}
-				</p>
-			{/if}
-			<a href="#consultation" class="btn btn-primary btn-lg">{page.heroCta || 'Book a Free Consultation'}</a>
+		<div class="hero-grid">
+			<div class="hero-content">
+				{#if page.heroEyebrow}
+					<p class="hero-eyebrow">{page.heroEyebrow}</p>
+				{/if}
+				<h1 class="hero-headline">{page.heroHeadline}</h1>
+				{#if page.heroSubheadline}
+					<p class="hero-subheadline">{page.heroSubheadline}</p>
+				{/if}
+				{#if page.heroSolution}
+					<p class="hero-solution">
+						<strong>There's a better way.</strong> {page.heroSolution.replace("There's a better way. ", '')}
+					</p>
+				{/if}
+				<a href="#consultation" class="btn btn-primary btn-lg">{page.heroCta || 'Book a Free Consultation'}</a>
+			</div>
+			<div class="hero-video">
+				<div class="video-placeholder">
+					<div class="play-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+							<path d="M8 5v14l11-7z"/>
+						</svg>
+					</div>
+					<span>Explainer Video Coming Soon</span>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
@@ -289,10 +301,15 @@
 		background: linear-gradient(135deg, var(--color-background) 0%, #e8e8e0 100%);
 	}
 
+	.hero-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--spacing-lg);
+		align-items: center;
+	}
+
 	.hero-content {
-		max-width: 800px;
-		margin: 0 auto;
-		text-align: center;
+		text-align: left;
 	}
 
 	.hero-eyebrow {
@@ -305,22 +322,62 @@
 	}
 
 	.hero-headline {
-		font-size: clamp(2.5rem, 5vw, 3.5rem);
+		font-size: clamp(2rem, 4vw, 3rem);
 		line-height: 1.1;
 		margin-bottom: var(--spacing-md);
 	}
 
 	.hero-subheadline {
-		font-size: 1.25rem;
+		font-size: 1.125rem;
 		color: var(--color-text-light);
 		line-height: 1.7;
 		margin-bottom: var(--spacing-sm);
 	}
 
 	.hero-solution {
-		font-size: 1.125rem;
+		font-size: 1rem;
 		line-height: 1.7;
 		margin-bottom: var(--spacing-md);
+	}
+
+	.hero-video {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.video-placeholder {
+		width: 100%;
+		aspect-ratio: 16/9;
+		background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+		border-radius: 12px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: var(--spacing-sm);
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+	}
+
+	.play-icon {
+		width: 64px;
+		height: 64px;
+		background: rgba(255, 255, 255, 0.1);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: rgba(255, 255, 255, 0.5);
+	}
+
+	.play-icon svg {
+		width: 32px;
+		height: 32px;
+	}
+
+	.video-placeholder span {
+		color: rgba(255, 255, 255, 0.5);
+		font-size: 0.875rem;
 	}
 
 	.btn-lg {
@@ -648,6 +705,20 @@
 
 	/* Responsive */
 	@media (max-width: 1024px) {
+		.hero-grid {
+			grid-template-columns: 1fr;
+			gap: var(--spacing-md);
+		}
+
+		.hero-content {
+			text-align: center;
+			order: 1;
+		}
+
+		.hero-video {
+			order: 2;
+		}
+
 		.problem-grid {
 			grid-template-columns: repeat(3, 1fr);
 		}

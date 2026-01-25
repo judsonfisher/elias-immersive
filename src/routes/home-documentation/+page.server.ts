@@ -11,10 +11,10 @@ const defaultContent: LandingPage = {
 	title: 'Home Documentation',
 	slug: { current: 'home-documentation' },
 	seo: {
-		metaTitle: 'Home Documentation & Digital Twins | Elias Immersive | Park City, Utah',
+		metaTitle: 'Home Documentation & Digital Twins | Elias Immersive',
 		metaDescription: 'Protect your home with comprehensive digital documentation. 3D scans and virtual walkthroughs for insurance claims, estate planning, and peace of mind.'
 	},
-	heroEyebrow: 'Home Documentation for Park City Homeowners',
+	heroEyebrow: 'Home Documentation for Homeowners',
 	heroHeadline: 'Could you prove what\'s in your home if disaster struck?',
 	heroSubheadline: 'Most homeowners can\'t. After a fire, flood, or theft, they struggle to remember—let alone prove—what they owned. Insurance claims stall. Settlements shrink. Memories fade.',
 	heroSolution: 'There\'s a better way. A complete digital twin of your home captures every room, every detail, every possession—creating an undeniable record that protects what matters most.',
@@ -50,8 +50,8 @@ const defaultContent: LandingPage = {
 		{ title: 'Processing', description: 'We create your interactive digital twin, optimized for easy navigation and detail review.' },
 		{ title: 'Delivery', description: 'Access your secure digital twin online. Walk through it anytime, share with advisors, export as needed.' }
 	],
-	trustTitle: 'Built for Park City Homeowners',
-	trustContent: 'We understand the unique needs of mountain properties. From expansive ski-in/ski-out residences to thoughtfully designed family compounds, our scanning technology captures the full scope of your investment—including those hard-to-document spaces like wine cellars, gear rooms, and architectural details that make your home unique.\n\nBased locally in Park City, we serve Summit County and surrounding areas. Your data stays secure, private, and accessible only to you.',
+	trustTitle: 'Built for Homeowners Who Value What They Own',
+	trustContent: 'We understand that every home tells a story. From expansive estates to thoughtfully designed family homes, our scanning technology captures the full scope of your investment—including those hard-to-document spaces like wine cellars, storage areas, and architectural details that make your home unique.\n\nYour data stays secure, private, and accessible only to you.',
 	ctaTitle: 'Book Your Free Consultation',
 	ctaDescription: 'Learn how a digital twin can protect your home and possessions. We\'ll discuss your property, answer questions, and provide a custom quote—no obligation.',
 	ctaBenefits: [
