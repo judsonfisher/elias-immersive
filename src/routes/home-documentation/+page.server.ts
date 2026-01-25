@@ -3,8 +3,15 @@ import { client, urlFor } from '$lib/sanity/client';
 import { landingPageBySlugQuery } from '$lib/sanity/queries';
 import type { LandingPage } from '$lib/types';
 
-// Matterport demo embed URL
-const MATTERPORT_EMBED_URL = 'https://my.matterport.com/show/?m=o6PVWmeo8Bb';
+// Matterport demo embed URL with guided tour parameters
+// play=1: auto-start the highlight reel
+// hl=1: enable highlight reel mode
+// ts=0: start from first highlight
+// lp=1: loop the tour continuously
+// brand=0: hide Matterport branding for cleaner look
+// mls=2: minimal UI (hides most controls)
+// gt=1: guided tour mode
+const MATTERPORT_EMBED_URL = 'https://my.matterport.com/show/?m=o6PVWmeo8Bb&play=1&hl=1&ts=0&lp=1&brand=0&mls=2&gt=1';
 
 // Default content for the Home Documentation landing page
 const defaultContent: LandingPage = {
