@@ -24,6 +24,7 @@
 
 			if (response.ok) {
 				submitted = true;
+				fbq('track', 'Lead');
 				form.reset();
 			} else {
 				const data = await response.json();
