@@ -14,7 +14,7 @@ const defaultContent: LandingPage = {
 		metaTitle: 'Home Documentation & Digital Twins | Elias Immersive',
 		metaDescription: 'Protect your home with comprehensive digital documentation. 3D scans and virtual walkthroughs for insurance claims, estate planning, and peace of mind.'
 	},
-	heroEyebrow: 'Home Documentation for Homeowners',
+	heroEyebrow: 'Beyond Photos: The Ultimate Source of Truth for Your Home',
 	heroHeadline: 'Could you prove what\'s in your home if disaster struck?',
 	heroSubheadline: 'Most homeowners can\'t. After a fire, flood, or theft, they struggle to remember—let alone prove—what they owned. Insurance claims stall. Settlements shrink. Memories fade.',
 	heroSolution: 'There\'s a better way. A complete digital twin of your home captures every room, every detail, every possession—creating an undeniable record that protects what matters most.',
@@ -100,6 +100,7 @@ export const load: PageServerLoad = async () => {
 			return {
 				landingPage,
 				solutionImageUrl: landingPage.solutionImage ? urlFor(landingPage.solutionImage).width(800).url() : null,
+				heroImageUrl: landingPage.heroImage ? urlFor(landingPage.heroImage).width(800).url() : null,
 				matterportEmbedUrl: MATTERPORT_EMBED_URL
 			};
 		}
@@ -108,6 +109,7 @@ export const load: PageServerLoad = async () => {
 		return {
 			landingPage: defaultContent,
 			solutionImageUrl: null,
+			heroImageUrl: '/images/home-documentation-hero.png',
 			matterportEmbedUrl: MATTERPORT_EMBED_URL
 		};
 	} catch (error) {
@@ -115,6 +117,7 @@ export const load: PageServerLoad = async () => {
 		return {
 			landingPage: defaultContent,
 			solutionImageUrl: null,
+			heroImageUrl: '/images/home-documentation-hero.png',
 			matterportEmbedUrl: MATTERPORT_EMBED_URL
 		};
 	}

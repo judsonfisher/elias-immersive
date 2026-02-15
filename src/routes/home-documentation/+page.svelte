@@ -87,15 +87,19 @@
 				{/if}
 				<a href="#consultation" class="btn btn-primary btn-lg">{page.heroCta || 'Book a Free Consultation'}</a>
 			</div>
-			<div class="hero-video">
-				<div class="video-placeholder">
-					<div class="play-icon">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-							<path d="M8 5v14l11-7z"/>
-						</svg>
+			<div class="hero-visual">
+				{#if data.heroImageUrl}
+					<img src={data.heroImageUrl} alt="3D digital twin model of a home" class="hero-image" />
+				{:else}
+					<div class="video-placeholder">
+						<div class="play-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+								<path d="M8 5v14l11-7z"/>
+							</svg>
+						</div>
+						<span>Explainer Video Coming Soon</span>
 					</div>
-					<span>Explainer Video Coming Soon</span>
-				</div>
+				{/if}
 			</div>
 		</div>
 	</div>
@@ -367,10 +371,17 @@
 		margin-bottom: var(--spacing-md);
 	}
 
-	.hero-video {
+	.hero-visual {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+
+	.hero-image {
+		width: 100%;
+		height: auto;
+		border-radius: 12px;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 	}
 
 	.video-placeholder {
@@ -809,7 +820,7 @@
 			order: 1;
 		}
 
-		.hero-video {
+		.hero-visual {
 			order: 2;
 		}
 

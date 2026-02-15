@@ -63,6 +63,15 @@ export default defineType({
 			type: 'string',
 			initialValue: 'Book a Free Consultation'
 		}),
+		defineField({
+			name: 'heroImage',
+			title: 'Hero Image',
+			type: 'image',
+			description: 'Image displayed in the hero section (e.g., 3D model preview)',
+			options: {
+				hotspot: true
+			}
+		}),
 		// Problem Section
 		defineField({
 			name: 'problemTitle',
