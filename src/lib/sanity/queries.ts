@@ -78,6 +78,7 @@ export const landingPageBySlugQuery = `*[_type == "landingPage" && slug.current 
   heroSubheadline,
   heroSolution,
   heroCta,
+  heroImage,
   problemTitle,
   problemStats,
   problemSummary,
