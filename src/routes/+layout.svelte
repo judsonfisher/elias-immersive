@@ -2,9 +2,11 @@
 	import { Header, Footer, SEO } from '$lib/components';
 	import '$lib/styles/global.css';
 	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+	import { inject } from '@vercel/analytics';
 	import type { SiteSettings } from '$lib/types';
 
 	injectSpeedInsights();
+	inject();
 
 	interface Props {
 		children: any;
